@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body p-5">
+    <h5 class="card-title m-1">{{l.title}}</h5>
+    <form ng-submit="l.auth()">
+        <input class="form-control form-control-lg m-2" ng-model="l.data.username" type="text" placeholder="usuário" aria-label="Usuário" required>
+
+        <input class="form-control form-control-lg m-2" ng-model="l.data.password"  type="password" placeholder="senha" aria-label="Senha" required>
+
+        <button class="btn btn-primary m-1" type="submit">{{l.title}}</button>
+    </form>
+  </div>
+</div>

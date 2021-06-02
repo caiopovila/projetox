@@ -1,0 +1,11 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home">{{n.title}}</a>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li ng-repeat="link in n.menu" class="breadcrumb-item"> <a href="{{link.link}}">{{link.name}}</a></li>
+            <li class="breadcrumb-item"><a href="#" ng-click="n.exit()">Sair</a></li>
+        </ol>
+    </nav>  
+  </div>
+</nav>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="pt-br" ng-app="projetox">
+    <head>
+        <base href="/">
+        <title>ProjetoX</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Aplicativo para contratação de seguros.">
+        <meta name="author" content="Caio Mendes Capovila"> 
+        
+        <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css" />
+    </head>
+    <body>
+    
+        <main ng-view class="container-fluid"></main>
+        
+        
+        <!-- imports -->
+        <script src="./lib/angular.js"></script>
+        <script src="./lib/route.js"></script>
+        <script src="./lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+        
+        
+        <script src="./src/projetox.module.js"></script>
+        <script src="./src/projetox.routing.js"></script>
+        <script src="./src/session.service.js"></script>
+        <script src="./src/interceptor.service.js"></script>
+        <script src="./src/projetox.controller.js"></script>
+        
+        <script src="./src/login/login.service.js"></script>
+        <script src="./src/login/login.controller.js"></script>
+        <script src="./src/login/login.component.js"></script>
+        
+        
+        <script src="./src/home/home.module.js"></script>
+        <script src="./src/home/home.routing.js"></script>
+        <script src="./src/home/home.service.js"></script>
+        <script src="./src/home/home.controller.js"></script>
+        
+        <script src="./src/home/navbar/navbar.component.js"></script>
+        <script src="./src/home/navbar/navbar.controller.js"></script>
+        
+        <script src="./src/home/quotations/quotations.controller.js"></script>
+        <script src="./src/home/covers/covers.controller.js"></script>
+        
+    </body>
+  
+</html>

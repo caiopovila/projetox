@@ -1,0 +1,17 @@
+<navbar></navbar>
+<h1 class="title d-flex justify-content-center">{{c.title}}</h1>
+
+<div class="accordion w-100" id="accordionExample">
+  <div ng-repeat="cover in c.covers" class="accordion-item">
+    <h2 class="accordion-header" id="heading{{cover._id}}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{cover._id}}" aria-expanded="false" aria-controls="collapse{{cover._id}}">
+        {{cover.name}}
+      </button>
+    </h2>
+    <div id="collapse{{cover._id}}" class="accordion-collapse collapse" aria-labelledby="heading{{cover._id}}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        {{cover.description}}
+      </div>
+    </div>
+  </div>
+</div>

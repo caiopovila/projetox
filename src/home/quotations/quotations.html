@@ -1,0 +1,121 @@
+<navbar></navbar>
+<h1 class="title d-flex justify-content-center m-3">{{q.title}}</h1>
+
+<br>
+
+<section ng-if="q.quotation" class="d-flex justify-content-center mt-5">
+    <ul class="list-group">
+        <li ng-if="q.quotation.id_user.name" class="list-group-item">Nome: {{q.quotation.id_user.name}}</li>
+        <li class="list-group-item">CPF: {{q.quotation.cpf || q.quotation[1].cpf}}</li>
+        <li class="list-group-item">Cobertura: {{q.quotation.cover.name || q.quotation[0].name}} </li>
+        <li class="list-group-item">Data de início: {{q.quotation.initiate || q.quotation[1].initiate | date}}</li>
+        <li class="list-group-item">Data de término: {{q.quotation.finish || q.quotation[1].finish | date}}</li>
+        <li ng-if="q.proposal" class="list-group-item">Número de parcelas: {{q.proposal.payment || q.proposal[1].payment}}</li>
+        <li ng-if="q.proposal" class="list-group-item">Valor: {{q.proposal.price || q.proposal[1].price | currency: 'R$ '}}</li>
+        <li ng-if="q.policy" class="list-group-item">Police: {{q.policy._id || q.policy[1]._id }}</li>
+    </ul>    
+</section>
+
+<div ng-if="!q.quotation" class="d-flex justify-content-center mt-5">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#quotation" class="btn btn-primary"> Gerar cotação </button>
+</div>
+
+<div class="modal fade" id="quotation" tabindex="-1" aria-labelledby="quotation" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form ng-submit="q.sendQuotation()">
+            <div class="modal-header">
+                <h5 class="modal-title" id="quotation">Cotação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <h6> Cobertura </h6>
+                    <div ng-repeat="cover in q.covers" class="form-check form-check-inline">
+                        <input class="form-check-input" ng-model="q.data.cover" type="radio" name="cover" ng-value="cover._id" id="{{cover._id}}" required>
+                        <label class="form-check-label" for="{{cover._id}}">
+                        {{cover.name}}
+                        </label>
+                    </div>
+                    
+                    <br>
+                    
+                    <div>
+                        <label for="cpf" class="form-label">CPF</label>
+                        <input type="text" class="form-control" id="cpf" ng-model="q.data.cpf" name="cpf" maxLength="11" minLength="11" required>                
+                    </div>
+                    
+                    <br>
+                    
+                    <div>
+                        <label for="initiate" class="form-label">Data inicial</label>
+                        <input type="date" class="form-control" id="initiate" ng-model="q.data.initiate" name="initiate" required>                
+                    </div>
+                    
+                    <br>
+                    
+                    <div>
+                        <label for="finish" class="form-label">Data final</label>
+                        <input type="date" class="form-control" id="finish" ng-model="q.data.finish" name="finish" required>                
+                    </div>
+                    
+                    <br>
+                    
+                    <div>
+                        <label for="value" class="form-label">Valor de risco</label>
+                        <input type="number" class="form-control" id="value" ng-model="q.data.value" step="0.01" min="5000.00" max="1000000.00" name="value" required>
+                    </div>       
+                    
+                    <br>
+                    
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary" ng-if="!q.quotation" ng-click="">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div ng-if="q.quotation && !q.proposal" class="d-flex justify-content-center mt-5">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#proposal" class="btn btn-primary"> Gerar proposta </button>
+</div>
+
+<div class="modal fade" id="proposal" tabindex="-1" aria-labelledby="proposal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form ng-submit="q.sendProposal()">
+            <div class="modal-header">
+                <h5 class="modal-title" id="proposal">Proposta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <span> Valor da proposta: {{ q.quotation.value * 0.05 | currency: 'R$ '}} </span>
+                
+                <br>
+                
+                <hr>
+                
+                <br>
+                
+                <div>
+                    <h5>Pagamento</h5>
+                    <label for="value" class="form-label">Número de parcelas</label>
+                    <input type="number" class="form-control" ng-model="q.payment" id="payment" step="1" min="0" max="12" name="payment" required>
+                </div>       
+                
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" ng-if="!q.proposal" class="btn btn-primary">Aceitar</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div ng-if="q.proposal && !q.policy" class="d-flex justify-content-center mt-5">
+    <button type="button" ng-click="q.sendPolicy()" class="btn btn-primary"> Gerar police </button>
+</div>
